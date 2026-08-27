@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "AI/ML Engineer Portfolio"
+description = "A narrative portfolio website for an AI/ML engineer, presenting their origin story, current work, shipped projects, skills, leadership, and contact details as a crafted scroll experience."
+version = "1.0.0"
+id = "artifacts/ai-ml-portfolio"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22357
+
+[services.development]
+run = "pnpm --filter @workspace/ai-ml-portfolio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ai-ml-portfolio", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/ai-ml-portfolio/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22357"
+BASE_PATH = "/"
