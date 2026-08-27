@@ -44,6 +44,21 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 
-# Replit
+# Replit platform files
 .cache/
 .local/
+.replit
+.replitignore
+.agents/
+
+# Python / uv (Replit-only)
+main.py
+pyproject.toml
+uv.lock
+.venv/
+
+# Attached assets (Replit uploads)
+attached_assets/
+
+# pnpm virtual store tsbuildinfo (build artifacts)
+**/*.tsbuildinfo

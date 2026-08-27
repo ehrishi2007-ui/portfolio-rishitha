@@ -329,12 +329,55 @@
   letter-spacing: .12em;
   text-transform: uppercase;
 }
-.present-note p {
+.present-note h3,
+.future-note h3 {
   margin: 0;
   color: #c8c3b5;
-  font-size: clamp(17px, 1.8vw, 24px);
-  letter-spacing: -.03em;
-  line-height: 1.42;
+  font-size: clamp(25px, 3vw, 42px);
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: 1.08;
+}
+.present-points,
+.future-points {
+  display: grid;
+  gap: 15px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.present-points li,
+.future-points li {
+  position: relative;
+  padding-left: 23px;
+  color: var(--muted-ink);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.present-points li::before,
+.future-points li::before {
+  position: absolute;
+  top: .65em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--lime);
+  border-radius: 50%;
+  content: "";
+}
+.future-note {
+  max-width: 780px;
+  margin-left: auto;
+  padding: 30px 0 30px 30px;
+  border-left: 1px solid var(--lime);
+}
+.future-note h3 {
+  max-width: 680px;
+  color: var(--paper);
+}
+.future-points li {
+  max-width: 680px;
+  color: #c8c3b5;
 }
 .stat-strip {
   display: flex;
@@ -489,6 +532,10 @@
   .section-heading h2 { font-size: 46px; }
   .story-grid, .skills-layout, .contact-inner { grid-template-columns: 1fr; gap: 34px; }
   .story-note { max-width: 230px; }
+  .present-note { margin-top: 58px; padding-left: 18px; }
+  .present-note h3, .future-note h3 { font-size: 32px; }
+  .present-points li, .future-points li { font-size: 14px; }
+  .future-note { padding-left: 18px; }
   .stat-strip { margin-top: 48px; }
   .stat { min-width: 50%; padding: 20px 15px 0 0; border-bottom: 1px solid var(--line); }
   .stat + .stat { padding-left: 15px; }
