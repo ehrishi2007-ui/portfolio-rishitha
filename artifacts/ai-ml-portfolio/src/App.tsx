@@ -212,7 +212,7 @@ function Home() {
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-copy">
             <Reveal>
-              <div className="eyebrow">A field note from Hyderabad</div>
+              <div className="eyebrow">Hey there, I'm Rishitha. Here is a look at my journey.</div>
             </Reveal>
             <Reveal delay="reveal-delay-1">
               <h1 id="hero-title">I came for the<br /><em>break-ins.</em><br />I stayed for the<br /><em>build-outs.</em></h1>
