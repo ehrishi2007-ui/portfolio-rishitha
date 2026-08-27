@@ -29,7 +29,7 @@ const profileLinks = {
   email: 'mailto:prishitha12007@gmail.com',
   linkedin: 'https://www.linkedin.com/in/sai-jyothi-rishitha-p-b51386329',
   github: 'https://github.com/ehrishi2007-ui',
-  resume: '/resume.pdf',
+  resume: `${import.meta.env.BASE_URL}resume.pdf`,
 };
 
 const sections = [
@@ -370,7 +370,7 @@ function Home() {
               <div className="contact-aside">
                 <p>Open to collaborating on useful AI, careful backend systems, and conversations about the questions this field is still learning how to answer.</p>
                 <div className="contact-links">
-                  <a className="contact-link" href={profileLinks.email} data-testid="link-email"><span><Mail size={14} strokeWidth={1.4} />&nbsp; Email me</span><span><ArrowUpRight size={16} strokeWidth={1.3} /></span></a>
+                  <a className="contact-link" href={profileLinks.email} data-testid="link-email"><span><Mail size={14} strokeWidth={1.4} />&nbsp; prishitha12007@gmail.com</span><span><ArrowUpRight size={16} strokeWidth={1.3} /></span></a>
                   <a className="contact-link" href={profileLinks.linkedin} target="_blank" rel="noreferrer" data-testid="link-linkedin"><span><Linkedin size={14} strokeWidth={1.4} />&nbsp; LinkedIn</span><span><ArrowUpRight size={16} strokeWidth={1.3} /></span></a>
                   <a className="contact-link" href={profileLinks.github} target="_blank" rel="noreferrer" data-testid="link-github"><span><Github size={14} strokeWidth={1.4} />&nbsp; GitHub</span><span><ArrowUpRight size={16} strokeWidth={1.3} /></span></a>
                   <a className="contact-link" href={profileLinks.resume} download data-testid="link-resume"><span><Download size={14} strokeWidth={1.4} />&nbsp; Download resume</span><span><ArrowDown size={16} strokeWidth={1.3} /></span></a>
