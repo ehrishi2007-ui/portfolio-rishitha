@@ -57,8 +57,5 @@ pyproject.toml
 uv.lock
 .venv/
 
-# Attached assets (Replit uploads)
-attached_assets/
-
 # pnpm virtual store tsbuildinfo (build artifacts)
 **/*.tsbuildinfo

@@ -1,17 +1,12 @@
+import fs from 'fs';
 import path from 'path';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
 
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
 
-const rawPort = process.env.PORT;
-
-if (!rawPort) {
-  throw new Error(
-    'PORT environment variable is required but was not provided.',
-  );
-}
+const rawPort = process.env.PORT || '4173';
 
 const port = Number(rawPort);
 
@@ -19,12 +14,36 @@ if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-const basePath = process.env.BASE_PATH;
+const basePath = process.env.BASE_PATH || '/';
+const normalizedBase = basePath.endsWith('/') ? basePath : `${basePath}/`;
+const siteOrigin = 'https://ehrishi2007-ui.github.io';
+const attachedAssetsDir = path.resolve(
+  import.meta.dirname,
+  '..',
+  '..',
+  'attached_assets',
+);
 
-if (!basePath) {
-  throw new Error(
-    'BASE_PATH environment variable is required but was not provided.',
-  );
+function ogImagePlugin(): Plugin {
+  const ogImagePath = path.resolve(attachedAssetsDir, 'og-image.png');
+  return {
+    name: 'rishitha-os-og-image',
+    transformIndexHtml(html) {
+      const canonicalUrl = `${siteOrigin}${normalizedBase}`;
+      const ogImageUrl = `${siteOrigin}${normalizedBase}og-image.png`;
+      return html
+        .replace(/__SITE_URL__/g, canonicalUrl)
+        .replace(/__OG_IMAGE_URL__/g, ogImageUrl);
+    },
+    writeBundle(options) {
+      if (!fs.existsSync(ogImagePath)) {
+        return;
+      }
+      const outDir =
+        options.dir || path.resolve(import.meta.dirname, 'dist/public');
+      fs.copyFileSync(ogImagePath, path.resolve(outDir, 'og-image.png'));
+    },
+  };
 }
 
 export default defineConfig({
@@ -33,6 +52,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     runtimeErrorOverlay(),
+    ogImagePlugin(),
     ...(process.env.NODE_ENV !== 'production' &&
     process.env.REPL_ID !== undefined
       ? [
@@ -50,12 +70,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(import.meta.dirname, 'src'),
-      '@assets': path.resolve(
-        import.meta.dirname,
-        '..',
-        '..',
-        'attached_assets',
-      ),
+      '@assets': attachedAssetsDir,
     },
     dedupe: ['react', 'react-dom'],
   },
@@ -71,6 +86,7 @@ export default defineConfig({
     allowedHosts: true,
     fs: {
       strict: true,
+      allow: [path.resolve(import.meta.dirname), attachedAssetsDir],
     },
   },
   preview: {
